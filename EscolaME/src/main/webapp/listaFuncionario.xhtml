@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="./WEB-INF/template/modelo.xhtml">
+            <ui:define name="principal">
+                    <h:form>
+                        <center>
+                            <h3 style="color: black">Pesquisar</h3>
+                            <h:panelGrid columns="2">
+                                <b:inputText placeholder="ID" style="width: 80px"
+                                             value="#{funcionarioBeans.id}"/>
+                                <b:inputText placeholder="Nome"
+                                             value="#{funcionarioBeans.nome}">
+                                    <f:facet name="append">
+                                        <b:commandButton icon="search" look="primary"
+                                                         action="#{funcionarioBeans.buscar()}"/>
+                                    </f:facet>
+                                </b:inputText>
+                            </h:panelGrid>
+                        </center>
+                    </h:form>
+                <hr></hr>
+                <h:form>
+                    <center>
+                        <h3 style="color: black">Editar Dados</h3>
+                        <h:panelGrid columns="7">
+                            <b:inputText style="width: 80px" display="inline-block"
+                                         placeholder="Id" 
+                                         value="#{funcionarioBeans.f.id}"/>
+
+                            <b:inputText style="width: 140px" placeholder="Nome"
+                                         value="#{funcionarioBeans.f.nome}"/>
+
+                            <b:inputText style="width: 230px" placeholder="RG"
+                                         mask="9.999.999-9" value="#{funcionarioBeans.f.rg}"/>
+
+                            <b:inputText style="width: 290px" placeholder="CPF"
+                                         mask="999.999.999-99" value="#{funcionarioBeans.f.cpf}"/>
+
+                            <b:inputText style="width: 170px" placeholder="Cargo"
+                                         value="#{funcionarioBeans.f.cargo}"/>
+
+                            <b:inputText style="width: 170px" placeholder="Salário"
+                                         value="#{funcionarioBeans.f.salario}">
+
+                                <f:facet name="append">
+                                    <b:commandButton look="primary"
+                                                     value="Salvar"
+                                                     icon-awesome="save"
+                                                     action="#{funcionarioBeans.atualizarFuncionario()}"/>
+                                </f:facet>
+                            </b:inputText>
+
+                        </h:panelGrid>
+                    </center>
+                </h:form>
+                <hr></hr>
+                <h:form>
+                    <b:dataTable var="funcionario" excel="true" csv="true" pdf="true"
+                                 print="true" value="#{funcionarioBeans.funcionarios}"
+                                 style="color: black">
+                        
+                        <b:dataTableColumn value="#{funcionario.id}"
+                                           order="desc" label="ID"/>
+                        
+                        <b:dataTableColumn value="#{funcionario.nome}"/>
+                        <b:dataTableColumn value="#{funcionario.rg}" label="RG"/>
+                        <b:dataTableColumn value="#{funcionario.cpf}" label="CPF"/>
+                        <b:dataTableColumn value="#{funcionario.cargo}"/>
+                        <b:dataTableColumn value="#{funcionario.salario}" label="Salário"/>
+                        
+                        <b:dataTableColumn label="Excluir" style="width: 5px">
+                            <b:commandButton look="danger" icon="trash" 
+                                             action="#{funcionarioBeans.excluirFuncionario(funcionario)}"/>
+                        </b:dataTableColumn>
+                        <b:dataTableColumn label="Editar" style="width: 5px ">
+                            <b:commandButton look="success" icon="edit"
+                                             action="#{funcionarioBeans.selecionar(funcionario)}"/>
+                        </b:dataTableColumn>
+                    </b:dataTable>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

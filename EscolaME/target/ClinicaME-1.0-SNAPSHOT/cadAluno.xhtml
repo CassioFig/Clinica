@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="./WEB-INF/template/modelo.xhtml">
+            <ui:define name="principal">
+                <h:form>
+                    <b:accordion expanded-panels="panel1,panel2">
+                        <b:panel id="panel1" title="Dados Pessoais">
+                            <center>
+                                <h:panelGrid columns="3">
+                                    <b:inputText placeholder="Nome" required="true"
+                                        style="width: 400px"
+                                        value="#{alunoBeans.nome}">
+                                        <f:facet name="prepend">
+                                            <b:icon name="user" style="color: black !important"/>
+                                        </f:facet>
+                                    </b:inputText>
+                                    
+                                    <b:inputText placeholder="RG" required="true"
+                                        mask="9.999.999-9" style="width: 120px"
+                                        value="#{alunoBeans.rg}">
+                                        <f:facet name="prepend">
+                                            <b:icon name="user" style="color: black !important"/>
+                                        </f:facet>
+                                    </b:inputText>
+                                    
+                                    <b:inputText placeholder="CPF" required="true"
+                                        mask="999.999.999-99" style="width: 150px"
+                                        value="#{alunoBeans.cpf}">
+                                        <f:facet name="prepend"> 
+                                            <b:icon name="user" style="color: black !important"/>
+                                        </f:facet>
+                                    </b:inputText>
+                                </h:panelGrid>
+                                
+                                <h:panelGrid columns="2">
+                                    <b:inputText placeholder="Data de Nascimento"
+                                                 required="true" mask="99/99/9999"
+                                                 style="width: 180px"
+                                                 value="#{alunoBeans.data}">
+                                        <f:facet name="prepend">
+                                            <b:icon name="calendar" style="color: black !important"/>
+                                        </f:facet>
+                                    </b:inputText>
+                                    <b:selectOneMenu select2="true" value="#{alunoBeans.sexo}" style="width: 150px;">
+                                            <f:selectItem itemLabel="Selecione o sexo" itemValue="" noSelectionOption="true" />
+                                            <f:selectItem itemLabel="Masculino" itemValue="M"/>
+                                            <f:selectItem itemLabel="Feminino" itemValue="F" />
+                                            <f:selectItem itemLabel="Outro" itemValue="Outro" />
+                                            <f:facet name="prepend">
+                                                <b:iconAwesome name="venus-mars"
+                                                               style="color: black"/>
+                                            </f:facet>
+                                    </b:selectOneMenu>
+                                </h:panelGrid>
+                            </center>
+                        </b:panel>
+                        <b:panel id="panel2" title="Notas">
+                            <center>
+                                <h:panelGrid columns="4">
+                                    <b:inputText required="true" style="width: 120px"
+                                                 value="#{alunoBeans.nb.nota1}">
+                                        <f:facet name="prepend">
+                                            <h:outputText value="Nota 1"/>
+                                        </f:facet>
+                                    </b:inputText>
+                                    <b:inputText required="true" style="width: 120px"
+                                                 value="#{alunoBeans.nb.nota2}">
+                                        <f:facet name="prepend">
+                                            <h:outputText value="Nota 2"/>
+                                        </f:facet>
+                                    </b:inputText>
+                                    <b:inputText required="true" style="width: 120px"
+                                                 value="#{alunoBeans.nb.nota3}">
+                                        <f:facet name="prepend">
+                                            <h:outputText value="Nota 3"/>
+                                        </f:facet>
+                                    </b:inputText>
+                                    <b:inputText required="true" style="width: 120px"
+                                                 value="#{alunoBeans.nb.nota4}">
+                                        <f:facet name="prepend">
+                                            <h:outputText value="Nota 4"/>
+                                        </f:facet>
+                                        <f:facet name="append">
+                                            <b:commandButton value="Calcular Nota" look="primary"
+                                                                 icon-awesome="calculator"
+                                                                 action="#{alunoBeans.nb.calculaNotaFinal()}"/>
+                                        </f:facet>
+                                    </b:inputText>
+                                </h:panelGrid>
+                                
+                                <h:panelGrid columns="2">
+                                    <b:inputText value="#{alunoBeans.nb.notaFinal}"
+                                                 style="width: 150px">
+                                        <f:facet name="prepend">
+                                            <h:outputText value="Nota Final"/>
+                                        </f:facet>
+                                    </b:inputText>
+                                        
+                                        <b:inputText value="#{alunoBeans.nb.status}"
+                                                     style="width: 150px">
+                                        <f:facet name="prepend">
+                                            <h:outputText value="Situação"/>
+                                        </f:facet>
+                                    </b:inputText>
+                                </h:panelGrid>
+                            </center>
+                        </b:panel>
+                    </b:accordion>
+                    <p/><br/>
+                    <b:commandButton value="Cadadastrar Aluno" icon-awesome="user-plus" 
+                                     look="success" style="width:50%; position: absolute; left: 25%" 
+                                     action="#{alunoBeans.cadastrarAluno()}"/>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

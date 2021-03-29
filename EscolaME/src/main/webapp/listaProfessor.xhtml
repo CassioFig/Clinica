@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="./WEB-INF/template/modelo.xhtml">
+            <ui:define name="principal">
+                    <h:form>
+                        <center>
+                            <h3 style="color: black">Pesquisar</h3>
+                            <h:panelGrid columns="5">
+                                <b:inputText placeholder="ID" style="width: 80px"
+                                             value="#{professorBeans.idFunc}"/>
+                                <b:inputText placeholder="Nome" style="width: 280px"
+                                             value="#{professorBeans.nome}"/>
+                                <b:inputText placeholder="Área" style="width: 280px"
+                                             value="#{professorBeans.areaInteresses}"/>
+                                <b:inputText placeholder="Disciplinas"
+                                             value="#{professorBeans.disciplinas}"
+                                             style="width: 280px">
+                                    <f:facet name="append">
+                                        <b:commandButton icon="search" look="primary"
+                                                         action="#{professorBeans.buscarTudo()}"/>
+                                    </f:facet>
+                                </b:inputText>
+                            </h:panelGrid>
+                        </center>
+                    </h:form>
+                <hr></hr>
+                <h:form>
+                    <center>
+                        <h3 style="color: black">Editar Dados</h3>
+                        <h:panelGrid columns="4">
+                            <b:inputText style="width: 80px" display="inline-block"
+                                         placeholder="Id" 
+                                         value="#{professorBeans.p.id}"/>
+
+                            <b:inputText style="width: 140px" placeholder="Disciplinas"
+                                         value="#{professorBeans.p.disciplinas}"/>
+
+                            <b:inputText style="width: 230px" placeholder="Áreas de Atuação"
+                                         value="#{professorBeans.p.areas}"/>
+
+                            <b:inputText style="width: 290px" placeholder="Id de Funcionário"
+                                         value="#{professorBeans.p.idFuncionario}">
+                                <f:facet name="append">
+                                    <b:commandButton look="primary"
+                                                     value="Salvar"
+                                                     icon-awesome="save"
+                                                     action="#{professorBeans.atualizarProfessor()}"/>
+                                </f:facet>
+                            </b:inputText>
+
+                        </h:panelGrid>
+                    </center>
+                </h:form>
+                <hr></hr>
+                <h:form>
+                    <b:dataTable var="professor" excel="true" csv="true" pdf="true"
+                                 print="true" value="#{professorBeans.professores}"
+                                 style="color: black">
+                        
+                        <b:dataTableColumn value="#{professor.id}"
+                                           order="desc" label="ID"/>
+                        
+                        <b:dataTableColumn value="#{professor.disciplinas}"/>
+                        <b:dataTableColumn value="#{professor.areas}" label="Áreas"/>
+                        <b:dataTableColumn value="#{professor.idFuncionario}" label="ID Funcionário"/>
+                        <b:dataTableColumn label="Excluir" style="width: 5px">
+                            <b:commandButton look="danger" icon="trash" 
+                                             action="#{professorBeans.excluirProf(professor)}"/>
+                        </b:dataTableColumn>
+                        <b:dataTableColumn label="Editar" style="width: 5px ">
+                            <b:commandButton look="success" icon="edit"
+                                             action="#{professorBeans.selecionaProf(professor)}"/>
+                        </b:dataTableColumn>
+                    </b:dataTable>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

@@ -1,0 +1,79 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui" 
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+      dir="ltr" >
+    <h:head>
+        <title>Escola|Web</title>
+        <meta name="author" content="Cassio"/>
+        <h:outputStylesheet library="css" name="modelo.css"/>
+    </h:head>
+    <h:body style="padding-top: 50px; padding-bottom: 20px;">
+        <b:navBar brand="Escola|Web" brandHref="dashboard.xhtml" inverse="false" 
+                  fixed="top" style="background: green !important">
+            
+            <b:navbarLinks>
+                <b:dropMenu value="Cadastros" iconAwesome="user-plus" 
+                            style="color: white !important">
+                    <b:navLink value="Funcionário" href="cadFuncionario.xhtml" style="color: 
+                        black !important;">
+                    </b:navLink>
+                    <b:navLink value="Aluno" href="cadAluno.xhtml" style="color: 
+                        black !important;">
+                    </b:navLink>
+                    <b:navLink value="Professor" href="cadProfessor.xhtml" style="color: 
+                        black !important;">
+                    </b:navLink>
+                </b:dropMenu>
+
+                <b:dropMenu value="Relatórios" iconAwesome="sticky-note" 
+                            style="color: white !important" >
+                    <b:navLink value="Funcionários" href="listaFuncionario.xhtml" 
+                               style="color: black !important"></b:navLink>
+                    <b:navLink value="Alunos e Notas" href="listaAlunosNotas.xhtml" 
+                               style="color: black !important"></b:navLink>
+                    <b:navLink value="Cursos" href="listaCurso.xhtml" 
+                               style="color: black !important"></b:navLink>
+                    <b:navLink value="Professor" href="listaProfessor.xhtml" 
+                               style="color: black !important"></b:navLink>
+                </b:dropMenu>
+
+                <b:dropMenu value="Meu Perfil" iconAwesome="user-circle" 
+                            style="color: white !important" >
+                    <b:navLink value="Configuração" href="#" 
+                               style="color: black !important"></b:navLink>
+                </b:dropMenu>
+
+                <b:navLink value="Sobre" href="#" iconAwesome="info-circle" 
+                           style="color: white !important" ></b:navLink>
+                           
+                <b:navLink value="Contato" href="#" iconAwesome="phone" 
+                           style="color: white !important" ></b:navLink>                 
+            </b:navbarLinks>
+        </b:navBar>
+        <b:jumbotron>
+            <ui:insert name="principal"></ui:insert>
+        </b:jumbotron>
+        <b:container>
+            <b:row>
+                <b:column col-md="6">
+                    <ui:insert name="col1"></ui:insert>
+                </b:column>
+                <b:column col-md="6">
+                    <h2>JSF</h2>
+                    <p>Como o sistema foi desenvolvido</p>
+                    <p><b:button outcome="" value="Ver detalhes »" ></b:button></p>
+                </b:column>
+            </b:row>
+
+            <hr></hr>
+
+            <footer>
+                <p>© Cassio - 2020</p>
+            </footer>
+        </b:container>
+    </h:body>
+</html>
+
+
+

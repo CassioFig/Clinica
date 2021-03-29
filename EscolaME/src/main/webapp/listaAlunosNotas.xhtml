@@ -1,0 +1,203 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="./WEB-INF/template/modelo.xhtml">
+            <ui:define name="principal">
+    <!-- Pesquisa =============================================================== -->
+                <center>
+                    <h:form>
+                        <h3 style="color: black">Pesquisar</h3>
+                        <hr></hr>
+                        <h:panelGrid columns="4">
+                            <b:inputText placeholder="Nome"
+                                         value="#{alunoBeans.nome}" style="width: 180px"/>
+                            <b:inputText placeholder="CPF"
+                                         value="#{alunoBeans.cpf}"
+                                          mask="999.999.999-99" style="width: 180px"/>
+                            <b:inputText placeholder="Data de Nascimento"
+                                         value="#{alunoBeans.data}"
+                                         mask="99/99/9999" style="width: 180px"/>
+                            <b:inputText placeholder="Status" style="width: 180px"
+                                         value="#{alunoBeans.status}" >
+                                <f:facet name="append">
+                                    <b:commandButton icon="search" look="primary"
+                                                     action="#{alunoBeans.buscar()}"/>
+                                </f:facet>
+                            </b:inputText>
+                        </h:panelGrid>
+                    </h:form>
+                </center>
+                <hr></hr>
+    
+    <!-- Editar Aluno =============================================================== -->
+    
+                <h:form>
+                    <center>
+                        <h3 style="color: black">Editar Aluno</h3>
+                            <hr></hr>
+                        <h:panelGrid columns="4">
+                            <b:inputText style="width: 80px" display="inline-block"
+                                         placeholder="Id" 
+                                         value="#{alunoBeans.a.id}"/>
+
+                            <b:inputText style="width: 140px" placeholder="Nome"
+                                         value="#{alunoBeans.a.nome}"/>
+
+                            <b:inputText style="width: 230px" placeholder="RG"
+                                         mask="9.999.999-9" value="#{alunoBeans.a.rg}"/>
+
+                            <b:inputText style="width: 290px" placeholder="CPF"
+                                         mask="999.999.999-99" value="#{alunoBeans.a.cpf}"/>
+
+                        </h:panelGrid>
+                        <h:panelGrid columns="4">
+                            <b:inputText style="width: 170px" placeholder="Data de Nascimento"
+                                         value="#{alunoBeans.a.nascimento}" mask="99/99/9999"/>
+
+                            <b:inputText style="width: 170px" placeholder="Sexo"
+                                         value="#{alunoBeans.a.sexo}"/>
+
+                            <b:inputText style="width: 170px" placeholder="Nota Final"
+                                         value="#{alunoBeans.a.notaFinal}"/>
+
+                            <b:inputText style="width: 170px" placeholder="Status"
+                                         value="#{alunoBeans.a.status}">
+
+                                <f:facet name="append">
+                                    <b:commandButton look="primary"
+                                                     value="Salvar"
+                                                     icon-awesome="save"
+                                                     action="#{alunoBeans.atualizarAluno()}"/>
+                                </f:facet>
+                            </b:inputText>
+                        </h:panelGrid>
+                    </center>
+                </h:form>
+                <hr></hr>
+                <h:form>
+                    
+    <!-- Lista de Alunos =============================================================== -->
+    
+                    <center>
+                        <h3 style="color: black">Lista de Alunos</h3>
+                    </center>
+    
+                    <b:dataTable var="aluno" excel="true" csv="true" pdf="true"
+                                 print="true" value="#{alunoBeans.alunos}"
+                                 style="color: black">
+
+                        <b:dataTableColumn value="#{aluno.id}"
+                                           order="desc" label="ID"/>
+
+                        <b:dataTableColumn value="#{aluno.nome}"/>
+                        <b:dataTableColumn value="#{aluno.rg}" label="RG"/>
+                        <b:dataTableColumn value="#{aluno.cpf}" label="CPF"/>
+                        <b:dataTableColumn value="#{aluno.nascimento}" 
+                                           label="Data de Nascimento"/>
+                        <b:dataTableColumn value="#{aluno.sexo}" label="Sexo"/>
+                        <b:dataTableColumn value="#{aluno.notaFinal}" label="Nota Final"/>
+                        <b:dataTableColumn value="#{aluno.status}" label="Status"/>
+
+                        <b:dataTableColumn label="Excluir" style="width: 5px">
+                            <b:commandButton look="danger" icon="trash" 
+                                             action="#{alunoBeans.excluirAluno(aluno)}"/>
+                        </b:dataTableColumn>
+                        <b:dataTableColumn label="Editar" style="width: 5px ">
+                            <b:commandButton look="success" icon="edit"
+                                             action="#{alunoBeans.selecionar(aluno)}"/>
+                        </b:dataTableColumn>
+                    </b:dataTable>
+    
+    <!-- Lista de Notas =============================================================== -->
+    
+                    <center>
+                        <h3 style="color: black">Lista de Notas</h3>
+                    </center>
+                    <b:dataTable var="notas" excel="true" csv="true" pdf="true"
+                         print="true" value="#{notasBeans.notases}"
+                         style="color: black">
+
+                        <b:dataTableColumn value="#{notas.id}"
+                                           order="desc" label="ID do Aluno"/>
+
+                        <b:dataTableColumn value="#{notas.nota1}" label="Nota 1"/>
+                        <b:dataTableColumn value="#{notas.nota2}" label="Nota 2"/>
+                        <b:dataTableColumn value="#{notas.nota3}" label="Nota 3"/>
+                        <b:dataTableColumn value="#{notas.nota4}" label="Nota 4"/>
+                        <b:dataTableColumn label="Editar" style="width: 5px ">
+                            <b:commandButton look="success" icon="edit"
+                                             action="#{notasBeans.selecionar(notas)}"/>
+                        </b:dataTableColumn>
+                    </b:dataTable>
+    
+    <!-- Editar Nota =============================================================== -->
+    
+                    <center>
+                        <h3 style="color: black">Editar Nota</h3>
+                        <hr></hr>
+                        <h:panelGrid columns="5">
+                            <b:inputText placeholder="ID" required="false" 
+                                         style="width: 80px" value="#{notasBeans.ndb.id}"/>
+                            
+                            <b:inputText required="false" style="width: 120px" value="#{notasBeans.ndb.nota1}">
+                                <f:facet name="prepend">
+                                    <h:outputText value="Nota 1"/>
+                                </f:facet>
+                            </b:inputText>
+                            <b:inputText required="false" style="width: 120px"
+                                         value="#{notasBeans.ndb.nota2}">
+                                <f:facet name="prepend">
+                                    <h:outputText value="Nota 2"/>
+                                </f:facet>
+                            </b:inputText>
+                            <b:inputText required="false" style="width: 120px"
+                                         value="#{notasBeans.ndb.nota3}">
+                                <f:facet name="prepend">
+                                    <h:outputText value="Nota 3"/>
+                                </f:facet>
+                            </b:inputText>
+                            <b:inputText required="false" style="width: 120px"
+                                         value="#{notasBeans.ndb.nota4}">
+                                <f:facet name="prepend">
+                                    <h:outputText value="Nota 4"/>
+                                </f:facet>
+                                <f:facet name="append">
+                                    <b:commandButton value="Atualizar Nota" look="primary"
+                                                         icon-awesome="calculator"
+                                                         action="#{notasBeans.atualizarNota()}"/>
+                                </f:facet>
+                            </b:inputText>
+                        </h:panelGrid>
+                        
+    <!-- Nota final e Status =============================================================== -->
+                        
+                        <h:panelGrid columns="2">
+                            <b:inputText value="#{notasBeans.notaFinal}"
+                                         style="width: 150px">
+                                <f:facet name="prepend">
+                                    <h:outputText value="Nota Final"/>
+                                </f:facet>
+                            </b:inputText>
+
+                            <b:inputText value="#{notasBeans.status}"
+                                             style="width: 150px">
+                                <f:facet name="prepend">
+                                    <h:outputText value="Situação"/>
+                                </f:facet>
+                            </b:inputText>
+                        </h:panelGrid>
+                    </center>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

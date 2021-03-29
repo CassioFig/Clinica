@@ -1,0 +1,143 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Clinica|Web</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="./WEB-INF/template/modelo.xhtml">
+            
+            <ui:define name="principal">
+                <h:form>
+                    
+                    <b:accordion expanded-panels="panel1,panel2,panel3,panel4">
+                        <b:panel id="panel1" title="Dados">
+                            <center>
+                            <h:panelGrid columns="4" > 
+                                <b:inputText placeholder="Nome" value="#{professorBeans.nome}" 
+                                             required="true" style="width: 400px">
+                                    <f:facet name="prepend">
+                                        <b:icon name="user" style="color:  black !important"/>
+                                    </f:facet>
+                                </b:inputText>
+                                
+                                <b:inputText placeholder="RG" value="#{professorBeans.rg}" 
+                                             required="true" mask="9.999.999-9" 
+                                             style="width: 120px">
+                                    <f:facet name="prepend">
+                                        <f:facet name="prepend">
+                                            <b:icon name="user" style="color:  black !important"/>
+                                        </f:facet>
+                                    </f:facet>
+                                </b:inputText>
+                                
+                                <b:inputText placeholder="CPF" value="#{professorBeans.cpf}" 
+                                             required="true" mask="999.999.999-99"
+                                             style="width: 150px">
+                                        <f:facet name="prepend">
+                                            <b:icon name="user" style="color:  black !important"/>
+                                        </f:facet>
+                                </b:inputText>
+                                
+                                <b:inputText placeholder="Cargo" value="#{professorBeans.cargo}"
+                                             required="true"
+                                             style="width: 150px">
+                                    <f:facet name="prepend">
+                                        <b:icon name="briefcase" style="color:  black !important"/>
+                                    </f:facet>
+                                </b:inputText>
+                            </h:panelGrid>
+                            </center>
+                        </b:panel>
+                        
+                        <b:panel id="panel2" title="Salário">
+                            <center>
+                                    <h:panelGrid columns="2">
+                                        <b:inputText placeholder="Salário" value="#{professorBeans.fb.salario}"
+                                                     required="true">
+                                            <f:facet name="prepend">
+                                                <h:outputText value="R$"/>
+                                            </f:facet>
+                                            <f:facet name="append">
+                                                <b:commandButton value="Calcular Salário" look="primary"
+                                                                 icon-awesome="calculator"
+                                                                 action="#{professorBeans.fb.calcularSalario()}"/>
+                                            </f:facet>
+                                        </b:inputText>
+                                    </h:panelGrid>
+
+                                <p:panelGrid columns="2" style="width: 420px">
+
+                                        <h:outputText value="INSS" style="color: black"/>
+                                        <h:outputText value="#{professorBeans.fb.inss}"
+                                                      style="color: black"/> 
+                                        
+                                        <h:outputText value="IRRF" style="color: black"/>
+                                        <h:outputText value="#{professorBeans.fb.irrf}"
+                                                      style="color: black"/> 
+                                        
+                                        <h:outputText value="Salário Líquido" style="color: black"/>
+                                        <h:outputText value="#{professorBeans.fb.salarioliquido}"
+                                                      style="color: black"/>
+                                    </p:panelGrid>
+                            </center>
+                        </b:panel>
+                        
+                        <b:panel id="panel3" title="Dados Professor">
+                            <p:tab title="Dados Professor">
+                                <center>
+                                    <h:panelGrid columns="2">
+                                        <b:inputText placeholder="Disciplinas" style="width: 180px"
+                                                     value="#{professorBeans.disciplinas}">
+                                            <f:facet name="prepend">
+                                                <b:icon name="book" style="color: black"/>
+                                            </f:facet>
+                                        </b:inputText>
+                                        <b:inputText placeholder="Área De Interesses" style="width: 180px"
+                                                     value="#{professorBeans.areaInteresses}">
+                                            <f:facet name="prepend">
+                                                <b:icon name="book" style="color: black"/>
+                                            </f:facet>
+                                        </b:inputText>
+                                    </h:panelGrid>
+                                </center>
+                            </p:tab>
+                        </b:panel>
+                        
+                        <b:panel id="panel4" title="Obeservação">
+                            <p:tab title="Observação">
+                            <h:panelGrid columns="1">
+                                <h:outputText value="Observação:  "/>
+                                <b:inputTextarea/>
+                            </h:panelGrid>
+                        </p:tab>
+                        </b:panel>
+                    </b:accordion>
+                    <p/><br/>
+                    <b:commandButton value="Cadastrar" icon-awesome="user-plus" look="success" 
+                                     style="width:50%; position: absolute; left: 25%"
+                                     action="#{professorBeans.cadastrar()}"
+                                     update="amodal" oncomplete="$('.modal-bid-example').modal('show');"/>
+                    
+                    <b:modal id="amodal" class="modal-bid-example" title="Cadastro"
+                             style="color: black">
+                        <h:panelGrid>
+                            <h2 style="color: black">Professor Cadastrado com Sucesso!</h2>
+                        </h:panelGrid>
+                        <f:facet name="footer">
+                            <b:button value="Fechar" dismiss="modal" onclick="return false;"/>
+                        </f:facet>
+                    </b:modal>
+                    
+                </h:form>
+            </ui:define>
+            
+        </ui:composition>
+    </h:body>
+</html>
+

@@ -1,0 +1,27 @@
+body{
+    background: #6ce165 !important;
+    font: normal 15pt Arial;
+    width: 100%;
+    height: 100%;
+}
+form#cadastro{
+    background: white;
+    width: 450px;
+    padding: 20px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+div#cabecalho{
+    background: #13590f;
+    width: 450px;
+    padding: 20px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-230%);
+    color: white;
+    text-align: center;
+    font: bold 15pt Arial;
+}
